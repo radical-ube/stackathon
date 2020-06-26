@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import p5 from 'p5'
 import Matter from 'matter-js'
 // import Box from './matter/bodies'
 import {Sketch} from './sketch'

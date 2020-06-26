@@ -49,7 +49,6 @@
     "history": "^4.9.0",
     "matter-js": "^0.14.2",
     "morgan": "^1.9.1",
-    "p5": "^1.0.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "pg": "^7.9.0",
