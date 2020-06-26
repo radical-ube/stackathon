@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Matter from 'matter-js'
-// import {Box} from './world/box'
 
 class Scene extends React.Component {
   constructor(props) {
@@ -11,7 +10,17 @@ class Scene extends React.Component {
 
   componentDidMount() {
     // module aliases from MatterJS
-    const {Engine, Render, World, Bodies, Mouse, MouseConstraint} = Matter
+    const {
+      Engine,
+      Render,
+      Runner,
+      Composites,
+      World,
+      Body,
+      Mouse,
+      MouseConstraint,
+      Bodies
+    } = Matter
 
     // create an engine and a world
     const engine = Engine.create({})
@@ -22,51 +31,79 @@ class Scene extends React.Component {
       element: this.refs.scene,
       engine,
       options: {
-        width: 600,
+        width: 800,
         height: 600,
-        wireframes: false
+        showAngleIndicator: true
+        // wireframes: false
       }
     })
 
-    // create bodies
-    const ballA = Bodies.circle(210, 100, 30, {restitution: 0.5})
-    const ballB = Bodies.circle(110, 50, 30, {restitution: 0.5})
+    // run the render
+    Render.run(render)
 
-    // add walls into the world
-    World.add(world, [
-      Bodies.rectangle(200, 0, 600, 50, {isStatic: true}),
-      Bodies.rectangle(200, 600, 600, 50, {isStatic: true}),
-      Bodies.rectangle(600, 300, 50, 600, {isStatic: true}),
-      Bodies.rectangle(0, 300, 50, 600, {isStatic: true})
-    ])
+    // create a runner
+    const runner = Runner.create()
+    Runner.run(runner, engine)
 
-    // add balls into the world
-    World.add(world, [ballA, ballB])
+    // create cloth with options
+    const group = Body.nextGroup(true)
+    const particleOptions = {
+      friction: 0.00001,
+      collisionFilter: {group: group},
+      render: {visible: false}
+    }
+    const constraintOptions = {stiffness: 0.06}
+
+    const cloth = Composites.softBody(
+      200,
+      100,
+      20,
+      12,
+      5,
+      5,
+      false,
+      8,
+      particleOptions,
+      constraintOptions
+    )
+
+    for (let i = 0; i < 20; i++) {
+      cloth.bodies[i].isStatic = true
+    }
+
+    // add cloth into the world
+    World.add(world, [cloth])
 
     // add mouse constraint
-    const mouse = Mouse.create(render.canvas),
-      mouseConstraint = MouseConstraint.create(engine, {
-        mouse,
-        constraint: {
-          stiffness: 0.2,
-          render: {
-            visible: false
-          }
+    const mouse = Mouse.create(render.canvas)
+    const mouseConstraint = MouseConstraint.create(engine, {
+      mouse,
+      constraint: {
+        stiffness: 0.98,
+        render: {
+          visible: false
         }
-      })
+      }
+    })
 
     // add the mouse constraint to the world
     World.add(world, mouseConstraint)
 
-    Matter.Events.on(mouseConstraint, 'mousedown', function(event) {
-      World.add(engine.world, Bodies.circle(150, 50, 30, {restitution: 0.7}))
+    // keep mouse in sync with rendering
+    render.mouse = mouse
+
+    // fit the render viewport to the scene
+    Render.lookAt(render, {
+      min: {x: 0, y: 0},
+      max: {x: 800, y: 600}
     })
+
+    // Matter.Events.on(mouseConstraint, 'mousedown', function (event) {
+    //   World.add(engine.world, Bodies.circle(150, 50, 30, { restitution: 0.7 }))
+    // })
 
     // run the engine
     Engine.run(engine)
-
-    // run the render
-    Render.run(render)
   }
 
   render() {
