@@ -2,14 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Matter from 'matter-js'
 // import Box from './matter/bodies'
-import Sketch from './sketch'
+import Sketch2 from './sketch2'
 
-class Scene extends React.Component {
+class Scene2 extends React.Component {
   constructor(props) {
     super(props)
     this.myRef = React.createRef()
     this.state = {
-      sketch: Sketch
+      sketch: Sketch2
     }
   }
 
@@ -25,4 +25,4 @@ class Scene extends React.Component {
   }
 }
 
-export default connect(null)(Scene)
+export default connect(null)(Scene2)
