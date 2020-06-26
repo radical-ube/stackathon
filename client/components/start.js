@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {default as Scene} from './scene'
+import {default as Canvas} from './canvas'
 
 export const Start = props => {
   return (
     <div>
       <h3>Start Page</h3>
-      <Scene />
+      <Canvas />
     </div>
   )
 }
