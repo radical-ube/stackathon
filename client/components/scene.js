@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Matter from 'matter-js'
-// import Box from './matter/bodies'
+
 import Sketch from './sketch'
 
 class Scene extends React.Component {
@@ -9,18 +8,15 @@ class Scene extends React.Component {
     super(props)
     this.myRef = React.createRef()
     this.state = {
-      sketch: Sketch
+      p5: Sketch
     }
   }
 
   componentDidMount() {
-    this.myP5 = new p5(this.state.sketch, this.myRef.current)
-    console.log('myP5', this.myP5)
-    console.log('state: sketch', this.state.sketch)
+    this.myP5 = new p5(this.state.p5, this.myRef.current)
   }
 
   render() {
-    // console.log(this.state.sketch)
     return <div ref={this.myRef} />
   }
 }

@@ -1,27 +1,45 @@
 import Matter from 'matter-js'
+import {boxConstructor} from './box'
 const {Engine, World, Bodies, Mouse, MouseConstraint} = Matter
 
-const Sketch2 = sketch => {
-  let engine
-  let world
+const engine = Engine.create()
+const world = engine.world
+
+let width = 600
+let height = 400
+
+const Sketch2 = p5 => {
+  // constructors
+  const Box = boxConstructor(p5)
+
   // bodies
-  let boxA = Bodies.rectangle(300, 100, 100, 80)
-  let boxB = Bodies.rectangle(360, 40, 80, 100)
-  let ground = Bodies.rectangle(300, 400, 810, 60, {isStatic: true})
+  const boxes = []
+  let boxA = new Box(400, 100, 80, 80)
+  let boxB = new Box(440, 140, 80, 80)
+  let ground = new Box(300, 400, 810, 60, {isStatic: true})
 
-  sketch.setup = () => {
-    sketch.createCanvas(600, 400)
-    engine = Engine.create()
-    world = engine.world
-
-    Engine.run(engine)
-    World.add(world, [boxA, boxB, ground])
+  p5.mouseDragged = () => {
+    const box = new Box(p5.mouseX, p5.mouseY, 50, 50)
+    World.add(world, box.body)
+    boxes.push(box)
   }
-  sketch.draw = () => {
-    sketch.background(0)
-    sketch.fill(255)
-    sketch.rect(boxA.position.x, boxA.position.y, 100, 80)
-    sketch.rect(boxB.position.x, boxB.position.y, 80, 100)
+
+  // render
+  p5.setup = () => {
+    p5.createCanvas(width, height)
+    Engine.run(engine)
+
+    World.add(world, [boxA.body, boxB.body, ground.body])
+  }
+  p5.draw = () => {
+    p5.background(0)
+    p5.fill(255)
+    boxA.show()
+    boxB.show()
+    ground.show()
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].show()
+    }
   }
 }
 

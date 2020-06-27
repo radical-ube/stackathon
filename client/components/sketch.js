@@ -2,33 +2,52 @@ import Matter from 'matter-js'
 import {boxConstructor} from './box'
 const {Engine, World, Bodies, Mouse, MouseConstraint} = Matter
 
-const Sketch = sketch => {
-  let engine
-  let world
+const engine = Engine.create()
+const world = engine.world
+
+let width = 600
+let height = 400
+
+const Sketch = p5 => {
+  // constructors
+  const Box = boxConstructor(p5)
+
   // bodies
-  const Box = boxConstructor(sketch)
-
-  // let boxA = Bodies.rectangle(400, 200, 80, 80)
+  const boxes = []
   let boxA = new Box(400, 100, 80, 80)
-  let boxB = Bodies.rectangle(440, 140, 80, 80)
-  let ground = Bodies.rectangle(300, 400, 810, 60, {isStatic: true})
+  let boxB = new Box(440, 140, 80, 80)
+  let ground = Bodies.rectangle(300, height, width, 10, {isStatic: true})
 
-  sketch.setup = () => {
-    sketch.createCanvas(600, 400)
-    engine = Engine.create()
-    world = engine.world
-
-    Engine.run(engine)
-    World.add(world, [boxA.body, boxB, ground])
-    console.log(boxA)
-    console.log(boxB)
+  p5.mouseDragged = () => {
+    const box = new Box(
+      p5.mouseX,
+      p5.mouseY,
+      p5.random(10, 40),
+      p5.random(10, 40)
+    )
+    World.add(world, box.body)
+    boxes.push(box)
   }
-  sketch.draw = () => {
-    sketch.background(0)
-    sketch.fill(255)
-    // sketch.rect(boxA.position.x, boxA.position.y, 80, 80)
+
+  // render
+  p5.setup = () => {
+    p5.createCanvas(width, height)
+    Engine.run(engine)
+
+    World.add(world, [boxA.body, boxB.body, ground])
+  }
+  p5.draw = () => {
+    p5.background(51)
+    for (let i = 0; i < boxes.length; i++) {
+      boxes[i].show()
+    }
     boxA.show()
-    sketch.rect(boxB.position.x, boxB.position.y, 80, 80)
+    boxB.show()
+    p5.stroke(255)
+    p5.fill(170)
+    p5.rectMode(p5.CENTER)
+    p5.rect(300, height, width, 10)
+    // ground.show()
   }
 }
 
