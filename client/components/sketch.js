@@ -6,8 +6,8 @@ const {Engine, World, Bodies, Mouse, MouseConstraint} = Matter
 const engine = Engine.create()
 const world = engine.world
 
-let width = 600
-let height = 400
+let width = window.innerWidth
+let height = window.innerHeight / 2
 
 const Sketch = p5 => {
   // constructors
@@ -46,6 +46,11 @@ const Sketch = p5 => {
     boxA.show()
     boxB.show()
     ground.show()
+  }
+  p5.windowResized = () => {
+    width = window.innerWidth
+    height = window.innerHeight / 2
+    p5.resizeCanvas(width, height)
   }
 }
 

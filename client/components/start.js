@@ -39,16 +39,17 @@ export const Start = props => {
             </Toolbar>
           </AppBar>
         </div>
-        <Scene />
-        <Scene2 />
-        {/* <P5wrapper /> */}
+        <div>
+          <Scene />
+          <Scene2 />
+        </div>
       </div>
-      {/* <div>
+      <div>
         <h3>second div</h3>
       </div>
       <div>
         <h3>third div</h3>
-      </div> */}
+      </div>
     </div>
   )
 }
