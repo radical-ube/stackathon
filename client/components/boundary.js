@@ -15,9 +15,6 @@ export const boundaryConstructor = p5 => {
     this.h = h
 
     this.show = function() {
-      let pos = this.body.position
-      let angle = this.body.angle
-
       p5.push()
       p5.stroke(255)
       p5.fill(170)

@@ -16,10 +16,6 @@ class Scene extends React.Component {
     this.myP5 = new p5(this.state.p5, this.myRef.current)
   }
 
-  // componentDidUpdate() {
-  //   console.log('updated client width', this.myRef.current.clientWidth)
-  // }
-
   render() {
     return <div ref={this.myRef} />
   }

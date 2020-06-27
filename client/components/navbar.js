@@ -4,28 +4,32 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+// material UI components
+import {makeStyles} from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+
+// MUI classes
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  title: {
+    flexGrow: 1
+  }
+}))
+
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    {/* <h1>BOILERMAKER</h1> */}
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          {/* <Link to="/login">Login</Link> */}
-          {/* <Link to="/signup">Sign Up</Link> */}
-        </div>
-      )}
-    </nav>
-    {/* <hr /> */}
-  </div>
+  <nav>
+    <AppBar position="static" className={useStyles().root}>
+      <Toolbar>
+        <Typography variant="h6" className={useStyles().title}>
+          Start Page
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  </nav>
 )
 
 /**
