@@ -5,12 +5,12 @@ const Sketch2 = sketch => {
   let engine
   let world
   // bodies
-  let boxA = Bodies.rectangle(300, 200, 100, 80)
-  let boxB = Bodies.rectangle(360, 140, 80, 100)
-  let ground = Bodies.rectangle(400, 380, 810, 60, {isStatic: true})
+  let boxA = Bodies.rectangle(300, 100, 100, 80)
+  let boxB = Bodies.rectangle(360, 40, 80, 100)
+  let ground = Bodies.rectangle(300, 400, 810, 60, {isStatic: true})
 
   sketch.setup = () => {
-    sketch.createCanvas(800, 600)
+    sketch.createCanvas(600, 400)
     engine = Engine.create()
     world = engine.world
 

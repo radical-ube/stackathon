@@ -15,8 +15,8 @@ class Scene2 extends React.Component {
 
   componentDidMount() {
     this.myP5 = new p5(this.state.sketch, this.myRef.current)
-    console.log('myP5', this.myP5)
-    console.log('state: sketch', this.state.sketch)
+    // console.log('myP5', this.myP5)
+    // console.log('state: sketch', this.state.sketch)
   }
 
   render() {
