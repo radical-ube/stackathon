@@ -18,7 +18,7 @@ const Sketch = p5 => {
   const boxes = []
   let boxA = new Box(400, 100, 80, 80)
   let boxB = new Box(440, 140, 80, 80)
-  let ground = new Boundary(300, height, width, 10)
+  let ground = new Boundary(width / 2, height, width * 2, 10)
 
   p5.mouseDragged = () => {
     const box = new Box(
@@ -37,6 +37,9 @@ const Sketch = p5 => {
     Engine.run(engine)
 
     World.add(world, [boxA.body, boxB.body, ground.body])
+    console.log(ground.w)
+    console.log(ground.body)
+    console.log(ground)
   }
   p5.draw = () => {
     p5.background(51)
@@ -51,6 +54,8 @@ const Sketch = p5 => {
     width = window.innerWidth
     height = window.innerHeight / 2
     p5.resizeCanvas(width, height)
+    ground.w = width
+    ground.x = width / 2
   }
 }
 

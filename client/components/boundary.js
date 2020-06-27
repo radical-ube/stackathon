@@ -9,6 +9,8 @@ export const boundaryConstructor = p5 => {
       isStatic: true
     }
     this.body = Bodies.rectangle(x, y, w, h, options)
+    this.x = x
+    this.y = y
     this.w = w
     this.h = h
 
@@ -20,7 +22,7 @@ export const boundaryConstructor = p5 => {
       p5.stroke(255)
       p5.fill(170)
       p5.rectMode(p5.CENTER)
-      p5.rect(x, y, w, h)
+      p5.rect(this.x, this.y, this.w, this.h)
       p5.pop()
     }
   }
