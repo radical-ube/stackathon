@@ -7,7 +7,7 @@ const engine = Engine.create()
 const world = engine.world
 
 let width = window.innerWidth
-let height = window.innerHeight / 2
+let height = window.innerHeight * 0.8
 
 const Sketch = p5 => {
   // constructors

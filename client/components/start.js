@@ -6,6 +6,8 @@ import {makeStyles} from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
 
 // MUI classes
 const useStyles = makeStyles(theme => ({
@@ -39,10 +41,20 @@ export const Start = props => {
             </Toolbar>
           </AppBar>
         </div>
-        <div>
-          <Scene />
-          <Scene2 />
-        </div>
+
+        <Box className={classes.root}>
+          <Grid container direction="row" justify="center" spacing={0}>
+            <Grid item xs={12} sm={6}>
+              <Scene />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Scene2 />
+            </Grid>
+            {/* <Grid item xs>
+              <Scene />
+            </Grid> */}
+          </Grid>
+        </Box>
       </div>
       <div>
         <h3>second div</h3>
