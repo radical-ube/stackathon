@@ -1,5 +1,6 @@
 import Matter from 'matter-js'
 import {boxConstructor} from './box'
+import {boundaryConstructor} from './boundary'
 const {Engine, World, Bodies, Mouse, MouseConstraint} = Matter
 
 const engine = Engine.create()
@@ -11,12 +12,13 @@ let height = 400
 const Sketch = p5 => {
   // constructors
   const Box = boxConstructor(p5)
+  const Boundary = boundaryConstructor(p5)
 
   // bodies
   const boxes = []
   let boxA = new Box(400, 100, 80, 80)
   let boxB = new Box(440, 140, 80, 80)
-  let ground = Bodies.rectangle(300, height, width, 10, {isStatic: true})
+  let ground = new Boundary(300, height, width, 10)
 
   p5.mouseDragged = () => {
     const box = new Box(
@@ -34,7 +36,7 @@ const Sketch = p5 => {
     p5.createCanvas(width, height)
     Engine.run(engine)
 
-    World.add(world, [boxA.body, boxB.body, ground])
+    World.add(world, [boxA.body, boxB.body, ground.body])
   }
   p5.draw = () => {
     p5.background(51)
@@ -43,11 +45,7 @@ const Sketch = p5 => {
     }
     boxA.show()
     boxB.show()
-    p5.stroke(255)
-    p5.fill(170)
-    p5.rectMode(p5.CENTER)
-    p5.rect(300, height, width, 10)
-    // ground.show()
+    ground.show()
   }
 }
 
