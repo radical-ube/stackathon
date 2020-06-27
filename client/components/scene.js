@@ -14,6 +14,14 @@ class Scene extends React.Component {
 
   componentDidMount() {
     this.myP5 = new p5(this.state.p5, this.myRef.current)
+    console.log(this.myRef)
+    console.log('client height', this.myRef.current.offsetHeight)
+    console.log('client width', this.myRef.current.clientWidth)
+    console.log(this.myRef.current)
+  }
+
+  componentDidUpdate() {
+    console.log('updated client width', this.myRef.current.clientWidth)
   }
 
   render() {
