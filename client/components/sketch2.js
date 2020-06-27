@@ -1,8 +1,7 @@
 import Matter from 'matter-js'
+const {Engine, World, Bodies, Mouse, MouseConstraint} = Matter
 
 const Sketch2 = sketch => {
-  const {Engine, World, Bodies, Mouse, MouseConstraint} = Matter
-
   let engine
   let world
   // bodies
