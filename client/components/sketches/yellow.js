@@ -16,22 +16,26 @@ const Sketch = p5 => {
 
   // bodies
   const boxes = []
-  let ground = new Boundary(width / 2, height, width * 2, 10)
+  // let ground = new Boundary(width / 2, height + 50, width, 10)
+  let wall1 = new Boundary(width / width - 21, height + 50, 20, height * 2)
+  let wall2 = new Boundary(width / 6 + 20, height + 50, 20, height * 2)
 
   p5.mouseDragged = () => {
-    const hue = p5.floor(p5.random(47, 58))
-    const saturation = p5.floor(p5.random(85, 100))
-    const lightness = p5.floor(p5.random(52, 62))
-    const alpha = p5.floor(p5.random(85, 100))
-    const box = new Box(
-      p5.mouseX,
-      p5.mouseY,
-      p5.random(10, 40),
-      p5.random(10, 40),
-      {hue, saturation, lightness, alpha}
-    )
-    World.add(world, box.body)
-    boxes.push(box)
+    if (p5.mouseX < width / 6 + 20 && p5.mouseX > width / width - 21) {
+      const hue = p5.floor(p5.random(47, 58))
+      const saturation = p5.floor(p5.random(85, 100))
+      const lightness = p5.floor(p5.random(52, 62))
+      const alpha = p5.floor(p5.random(85, 100))
+      const box = new Box(
+        p5.mouseX,
+        p5.mouseY,
+        p5.random(10, 40),
+        p5.random(10, 40),
+        {hue, saturation, lightness, alpha}
+      )
+      World.add(world, box.body)
+      boxes.push(box)
+    }
   }
 
   // render
@@ -39,21 +43,26 @@ const Sketch = p5 => {
     p5.createCanvas(width, height)
     Engine.run(engine)
 
-    World.add(world, [ground.body])
+    World.add(world, [wall1.body, wall2.body])
   }
   p5.draw = () => {
     p5.background(50, 50, 50, 150)
     for (let i = 0; i < boxes.length; i++) {
       boxes[i].show()
+      if (boxes[i].isOffScreen()) {
+        World.remove(world, boxes[i].body)
+        boxes.splice(i, 1)
+        i--
+      }
     }
-    ground.show()
+    // ground.show()
   }
   p5.windowResized = () => {
     width = window.innerWidth
     height = window.innerHeight / 2
     p5.resizeCanvas(width, height)
-    ground.w = width
-    ground.x = width / 2
+    // ground.w = width
+    // ground.x = width / 2
   }
 }
 

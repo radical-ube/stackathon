@@ -1,5 +1,5 @@
 import Matter from 'matter-js'
-const {Bodies} = Matter
+const {World, Bodies} = Matter
 
 export const boxConstructor = p5 => {
   return function Box(x, y, w, h, color) {
@@ -14,14 +14,17 @@ export const boxConstructor = p5 => {
     this.saturation = color.saturation
     this.lightness = color.lightness
     this.alpha = color.alpha
+    this.pos = this.body.position
+    this.angle = this.body.angle
+
+    this.isOffScreen = function() {
+      return this.pos.y > p5.windowHeight
+    }
 
     this.show = function() {
-      let pos = this.body.position
-      let angle = this.body.angle
-
       p5.push()
-      p5.translate(pos.x, pos.y)
-      p5.rotate(angle)
+      p5.translate(this.pos.x, this.pos.y)
+      p5.rotate(this.angle)
       p5.rectMode(p5.CENTER)
       p5.colorMode(p5.HSL)
       p5.fill(this.hue, this.saturation, this.lightness, this.alpha)
