@@ -16,9 +16,8 @@ const Sketch = p5 => {
 
   // bodies
   const boxes = []
-  // let ground = new Boundary(width / 2, height / 2, width, 10)
-  let wall1 = new Boundary(width / width - 21, height + 50, 20, height * 2)
-  let wall2 = new Boundary(width / 6 + 20, height + 50, 20, height * 2)
+  let wall1 = new Boundary(width / width - 21, height + 50, 5, height * 2)
+  let wall2 = new Boundary(width / 6 + 20, height + 50, 5, height * 2)
 
   p5.mouseDragged = () => {
     if (p5.mouseX < width / 6 + 20 && p5.mouseX > width / width - 21) {
@@ -29,8 +28,8 @@ const Sketch = p5 => {
       const box = new Box(
         p5.mouseX,
         p5.mouseY,
-        p5.random(10, 40),
-        p5.random(10, 40),
+        p5.random(3, 8),
+        p5.random(200, 250),
         {hue, saturation, lightness, alpha}
       )
       World.add(world, box.body)
@@ -55,14 +54,11 @@ const Sketch = p5 => {
         i--
       }
     }
-    // ground.show()
   }
   p5.windowResized = () => {
     width = window.innerWidth
     height = window.innerHeight / 2
     p5.resizeCanvas(width, height)
-    // ground.w = width
-    // ground.x = width / 2
   }
 }
 

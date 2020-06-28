@@ -21,12 +21,12 @@ export const Start = props => {
   return (
     <div>
       <Rainbow />
-      <div>
+      {/* <div>
         <h3>second div</h3>
       </div>
       <div>
         <h3>third div</h3>
-      </div>
+      </div> */}
     </div>
   )
 }
