@@ -17,18 +17,19 @@ import {default as Rainbow} from './rainbow'
 
 export const Start = props => {
   const classes = useStyles()
+  // const { scene } = props
 
   return (
     <div>
       <Rainbow />
-      {/* <div>
-        <h3>second div</h3>
-      </div>
-      <div>
-        <h3>third div</h3>
-      </div> */}
     </div>
   )
 }
 
-export default connect(null)(Start)
+const mapState = state => {
+  return {
+    scene: state.scene
+  }
+}
+
+export default connect(mapState)(Start)
