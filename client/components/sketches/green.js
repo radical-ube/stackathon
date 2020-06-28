@@ -19,9 +19,9 @@ const Sketch = p5 => {
   let ground = new Boundary(width / 2, height, width * 2, 10)
 
   p5.mouseDragged = () => {
-    const red = p5.floor(p5.random(150, 200))
-    const green = 0
-    const blue = p5.floor(p5.random(150, 200))
+    const red = 0
+    const green = p5.floor(p5.random(200, 220))
+    const blue = p5.floor(p5.random(25, 75))
     const alpha = p5.floor(p5.random(150, 255))
     const box = new Box(
       p5.mouseX,
@@ -38,9 +38,8 @@ const Sketch = p5 => {
   p5.setup = () => {
     p5.createCanvas(width, height)
     Engine.run(engine)
+
     World.add(world, [ground.body])
-    p5.createDiv('div text')
-    p5.createP('p text')
   }
   p5.draw = () => {
     p5.background(50, 50, 50, 150)

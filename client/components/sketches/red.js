@@ -21,7 +21,7 @@ const Sketch = p5 => {
   p5.mouseDragged = () => {
     const red = p5.floor(p5.random(200, 255))
     const green = 0
-    const blue = 0
+    const blue = p5.floor(p5.random(20, 45))
     const alpha = p5.floor(p5.random(150, 255))
     const box = new Box(
       p5.mouseX,
