@@ -1,6 +1,6 @@
 import Matter from 'matter-js'
-import {boxConstructor} from './box'
-import {boundaryConstructor} from './boundary'
+import {boxConstructor} from '../matter/box'
+import {boundaryConstructor} from '../matter/boundary'
 const {Engine, World} = Matter
 
 const engine = Engine.create()
@@ -19,11 +19,16 @@ const Sketch = p5 => {
   let ground = new Boundary(width / 2, height, width * 2, 10)
 
   p5.mouseDragged = () => {
+    const red = p5.floor(p5.random(150, 200))
+    const green = 0
+    const blue = p5.floor(p5.random(150, 200))
+    const alpha = p5.floor(p5.random(150, 255))
     const box = new Box(
       p5.mouseX,
       p5.mouseY,
       p5.random(10, 40),
-      p5.random(10, 40)
+      p5.random(10, 40),
+      {red, green, blue, alpha}
     )
     World.add(world, box.body)
     boxes.push(box)
@@ -33,8 +38,9 @@ const Sketch = p5 => {
   p5.setup = () => {
     p5.createCanvas(width, height)
     Engine.run(engine)
-
     World.add(world, [ground.body])
+    p5.createDiv('div text')
+    p5.createP('p text')
   }
   p5.draw = () => {
     p5.background(51)

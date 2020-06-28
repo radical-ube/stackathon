@@ -13,28 +13,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-// p5 sketches
-import {default as Scene} from './scene'
-import {default as Scene2} from './scene2'
+import {default as Rainbow} from './rainbow'
 
 export const Start = props => {
   const classes = useStyles()
 
   return (
     <div>
-      <Box className={classes.root}>
-        <Grid container direction="row" justify="center" spacing={0}>
-          <Grid item xs={12} sm={6}>
-            <Scene />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Scene2 />
-          </Grid>
-          {/* <Grid item xs>
-              <Scene />
-            </Grid> */}
-        </Grid>
-      </Box>
+      <Rainbow />
       <div>
         <h3>second div</h3>
       </div>

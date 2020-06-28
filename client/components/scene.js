@@ -1,14 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import Sketch from './sketch'
-
 class Scene extends React.Component {
   constructor(props) {
     super(props)
     this.myRef = React.createRef()
     this.state = {
-      p5: Sketch
+      p5: this.props.color
     }
   }
 
