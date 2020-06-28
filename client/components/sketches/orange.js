@@ -19,16 +19,16 @@ const Sketch = p5 => {
   let ground = new Boundary(width / 2, height, width * 2, 10)
 
   p5.mouseDragged = () => {
-    const red = p5.floor(p5.random(200, 255))
-    const green = p5.floor(p5.random(100, 150))
-    const blue = 0
-    const alpha = p5.floor(p5.random(150, 255))
+    const hue = p5.floor(p5.random(12, 27))
+    const saturation = p5.floor(p5.random(86, 100))
+    const lightness = p5.floor(p5.random(52, 60))
+    const alpha = p5.floor(p5.random(85, 100))
     const box = new Box(
       p5.mouseX,
       p5.mouseY,
       p5.random(10, 40),
       p5.random(10, 40),
-      {red, green, blue, alpha}
+      {hue, saturation, lightness, alpha}
     )
     World.add(world, box.body)
     boxes.push(box)
