@@ -20,6 +20,7 @@ export const Start = props => {
   return (
     <div>
       <Link to="/rainbow">Rainbow</Link>
+      <Link to="/questions">Questions</Link>
     </div>
   )
 }
