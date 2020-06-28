@@ -12,7 +12,7 @@ import {
   getGreenColor,
   getBlueColor,
   getPurpleColor
-} from './sketches/colors'
+} from './colors'
 
 const {Engine, World} = Matter
 

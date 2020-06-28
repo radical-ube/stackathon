@@ -1,5 +1,5 @@
 import Matter from 'matter-js'
-const {World, Bodies} = Matter
+const {Bodies} = Matter
 
 export const boxConstructor = p5 => {
   return function Box(x, y, w, h, color) {
