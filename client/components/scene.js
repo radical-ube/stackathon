@@ -15,42 +15,51 @@ import {
 } from './sketches/colors'
 
 const {Engine, World} = Matter
-const engine = Engine.create()
-const world = engine.world
-
-let width = window.innerWidth
-let height = window.innerHeight * 0.8
 
 const Scene = props => {
   const [myRef, setMyRef] = useState(React.createRef())
-  const [getColor, setGetColor] = useState({})
 
   const Sketch = p5 => {
+    const engine = Engine.create()
+    const world = engine.world
+
+    let width = window.innerWidth
+    let height = window.innerHeight * 0.8
     // constructors
     const Box = boxConstructor(p5)
     const Boundary = boundaryConstructor(p5)
 
     // bodies
     const boxes = []
-    let ground = new Boundary(width / 2, height + 50, width, 10)
+    let ground = new Boundary(width / 2, height, width, 10)
     let wall1 = new Boundary(width / width - 21, height / 2, 5, height)
     let wall2 = new Boundary(width / 6 + 20, height / 2, 5, height)
 
     p5.mouseDragged = () => {
       if (p5.mouseX < width / 6 + 20 && p5.mouseX > width / width - 21) {
-        // console.log(this.state.getColor)
-        // const color = this.state.getColor()
-
+        let color
+        if (props.color === 'red') {
+          color = getRedColor()
+        } else if (props.color === 'orange') {
+          color = getOrangeColor()
+        } else if (props.color === 'yellow') {
+          color = getYellowColor()
+        } else if (props.color === 'green') {
+          color = getGreenColor()
+        } else if (props.color === 'blue') {
+          color = getBlueColor()
+        } else if (props.color === 'purple') {
+          color = getPurpleColor()
+        }
         const box = new Box(
           p5.mouseX,
           p5.mouseY,
-          p5.random(8, 20),
-          p5.random(10, 50)
-          // color
+          p5.random(10, 40),
+          p5.random(10, 40),
+          color
         )
         World.add(world, box.body)
         boxes.push(box)
-        // console.log('world', world)
       }
     }
 
@@ -84,33 +93,9 @@ const Scene = props => {
 
   useEffect(() => {
     const myP5 = new p5(Sketch, myRef.current)
-    console.log('color', props.color)
-    console.log('getColor', getColor)
-    console.log('getRed', getRedColor)
   }, [])
 
   return <div ref={myRef} />
 }
 
 export default connect(null)(Scene)
-
-// if (this.props.color === 'red') {
-//   this.setState({getColor: getRedColor})
-// }
-// else if (this.props.color === 'orange') {
-//   this.setState({getColor: getOrangeColor})
-// }
-// else if (this.props.color === 'yellow') {
-//   this.setState({getColor: getYellowColor})
-// }
-// else if (this.props.color === 'green') {
-//   this.setState({getColor: getGreenColor})
-// }
-// else if (this.props.color === 'blue') {
-//   this.setState({getColor: getBlueColor})
-// }
-// else if (this.props.color === 'purple') {
-//   this.setState({getColor: getPurpleColor})
-// }
-// console.log(this.state.getColor)
-// // console.log('in componentDidMount', this.props.color)

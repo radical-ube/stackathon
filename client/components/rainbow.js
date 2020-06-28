@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 // p5 sketches
 import {default as Scene} from './scene'
-import {red, orange, yellow, green, blue, purple} from './sketches/index'
+// import {red, orange, yellow, green, blue, purple} from './sketches/index'
 
 const Rainbow = props => {
   return (
