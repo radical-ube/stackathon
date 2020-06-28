@@ -22,22 +22,22 @@ const Rainbow = props => {
     <Box className={useStyles().root}>
       <Grid container direction="row" justify="center" spacing={0}>
         <Grid item xs={12} sm={2}>
-          <Scene color={red} />
+          <Scene color="red" />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color={orange} />
+          <Scene color="orange" />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color={yellow} />
+          <Scene color="yellow" />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color={green} />
+          <Scene color="green" />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color={blue} />
+          <Scene color="blue" />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color={purple} />
+          <Scene color="purple" />
         </Grid>
       </Grid>
     </Box>

@@ -25,7 +25,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <AppBar position="static" className={useStyles().root}>
       <Toolbar>
         <Typography variant="h6" className={useStyles().title}>
-          Start Page
+          <Link to="/">Start Page</Link>
         </Typography>
       </Toolbar>
     </AppBar>

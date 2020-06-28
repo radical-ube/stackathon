@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 // material UI components
 import {makeStyles} from '@material-ui/core/styles'
@@ -13,15 +14,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-import {default as Rainbow} from './rainbow'
-
 export const Start = props => {
   const classes = useStyles()
-  // const { scene } = props
 
   return (
     <div>
-      <Rainbow />
+      <Link to="/rainbow">Rainbow</Link>
     </div>
   )
 }
