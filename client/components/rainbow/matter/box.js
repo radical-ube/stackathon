@@ -16,7 +16,7 @@ export const boxConstructor = p5 => {
     this.alpha = color.alpha
 
     this.isOffScreen = function() {
-      return this.pos.y > p5.windowHeight
+      return this.body.position.y > p5.windowHeight
     }
 
     this.show = function() {

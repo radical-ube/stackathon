@@ -5,15 +5,6 @@ import Matter from 'matter-js'
 import {boxConstructor} from './matter/box'
 import {boundaryConstructor} from './matter/boundary'
 
-import {
-  getRedColor,
-  getOrangeColor,
-  getYellowColor,
-  getGreenColor,
-  getBlueColor,
-  getPurpleColor
-} from './colors'
-
 const {Engine, World} = Matter
 
 export const Scene = props => {
@@ -37,20 +28,8 @@ export const Scene = props => {
 
     p5.mouseDragged = () => {
       if (p5.mouseX < width / 6 + 10 && p5.mouseX > width / width - 11) {
-        let color
-        if (props.color === 'red') {
-          color = getRedColor()
-        } else if (props.color === 'orange') {
-          color = getOrangeColor()
-        } else if (props.color === 'yellow') {
-          color = getYellowColor()
-        } else if (props.color === 'green') {
-          color = getGreenColor()
-        } else if (props.color === 'blue') {
-          color = getBlueColor()
-        } else if (props.color === 'purple') {
-          color = getPurpleColor()
-        }
+        let color = props.getColor()
+
         const box = new Box(
           p5.mouseX,
           p5.mouseY,

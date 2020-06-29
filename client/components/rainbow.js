@@ -15,27 +15,36 @@ const useStyles = makeStyles(theme => ({
 // p5 sketches
 import {Scene} from './rainbow/scene'
 
+import {
+  getRedColor,
+  getOrangeColor,
+  getYellowColor,
+  getGreenColor,
+  getBlueColor,
+  getPurpleColor
+} from './rainbow/colors'
+
 export const Rainbow = props => {
   return (
     <Box className={useStyles().root}>
       <Grid container direction="row" justify="center" spacing={0}>
         <Grid item xs={12} sm={2}>
-          <Scene color="red" />
+          <Scene getColor={getRedColor} />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color="orange" />
+          <Scene getColor={getOrangeColor} />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color="yellow" />
+          <Scene getColor={getYellowColor} />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color="green" />
+          <Scene getColor={getGreenColor} />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color="blue" />
+          <Scene getColor={getBlueColor} />
         </Grid>
         <Grid item xs={12} sm={2}>
-          <Scene color="purple" />
+          <Scene getColor={getPurpleColor} />
         </Grid>
       </Grid>
     </Box>
