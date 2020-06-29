@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import p5 from 'p5'
 import {connect} from 'react-redux'
 
 const Scene = props => {

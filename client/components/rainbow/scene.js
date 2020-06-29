@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {connect} from 'react-redux'
+import p5 from 'p5'
 
 import Matter from 'matter-js'
 import {boxConstructor} from './matter/box'
@@ -16,7 +16,7 @@ import {
 
 const {Engine, World} = Matter
 
-const Scene = props => {
+export const Scene = props => {
   const [myRef, setMyRef] = useState(React.createRef())
 
   const Sketch = p5 => {
@@ -36,7 +36,7 @@ const Scene = props => {
     let wall2 = new Boundary(width / 6 + 20, height / 2, 5, height)
 
     p5.mouseDragged = () => {
-      if (p5.mouseX < width / 6 + 20 && p5.mouseX > width / width - 21) {
+      if (p5.mouseX < width / 6 + 10 && p5.mouseX > width / width - 11) {
         let color
         if (props.color === 'red') {
           color = getRedColor()
@@ -97,5 +97,3 @@ const Scene = props => {
 
   return <div ref={myRef} />
 }
-
-export default connect(null)(Scene)

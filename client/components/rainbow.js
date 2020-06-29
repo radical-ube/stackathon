@@ -1,5 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
 
 // material UI components
 import {makeStyles} from '@material-ui/core/styles'
@@ -14,9 +13,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 // p5 sketches
-import {default as Scene} from './rainbow/scene'
+import {Scene} from './rainbow/scene'
 
-const Rainbow = props => {
+export const Rainbow = props => {
   return (
     <Box className={useStyles().root}>
       <Grid container direction="row" justify="center" spacing={0}>
@@ -42,5 +41,3 @@ const Rainbow = props => {
     </Box>
   )
 }
-
-export default connect(null)(Rainbow)
