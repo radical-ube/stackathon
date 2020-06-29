@@ -4,13 +4,15 @@ import {Link} from 'react-router-dom'
 
 // material UI components
 import {makeStyles} from '@material-ui/core/styles'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Typography from '@material-ui/core/Typography'
+import {
+  Box,
+  Grid,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography
+} from '@material-ui/core'
 
 // MUI classes
 const useStyles = makeStyles(theme => ({
@@ -19,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     width: window.innerWidth / 2,
-    height: window.innerHeight / 2
+    height: window.innerHeight * 0.7
   }
 }))
 

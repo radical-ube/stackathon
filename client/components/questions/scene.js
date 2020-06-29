@@ -6,7 +6,7 @@ const Scene = props => {
 
   const Sketch = p5 => {
     let width = window.innerWidth
-    let height = window.innerHeight * 0.5
+    let height = window.innerHeight * 0.8
     let string = ''
 
     const strings = []
@@ -17,7 +17,8 @@ const Scene = props => {
       p5.background(50, 150)
       p5.fill(255)
       p5.textSize(32)
-      p5.text(string, width / 2, height / 2)
+      p5.text('What makes you proud?', width / 2 - 150, height * 0.9)
+      p5.text(string, width / 2 - 100, height / 2 - 50)
 
       if (strings.length) {
         p5.text('', 0, 0)
@@ -35,7 +36,6 @@ const Scene = props => {
       if (p5.keyCode === p5.ENTER) {
         strings.push(string)
         string = ''
-        // console.log(strings)
       }
       if (p5.keyCode === p5.BACKSPACE) {
         string = string.substring(0, string.length - 1)

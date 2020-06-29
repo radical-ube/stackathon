@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-import {Navbar} from './components'
+import {Navbar, Footer} from './components'
 import Routes from './routes'
 
 const App = () => {
@@ -20,6 +20,7 @@ const App = () => {
     <Box className={useStyles().root}>
       <Navbar />
       <Routes />
+      <Footer />
     </Box>
   )
 }
