@@ -16,16 +16,17 @@ const Scene = props => {
     p5.draw = () => {
       p5.background(50, 150)
       p5.fill(255)
-
+      p5.textSize(32)
       p5.text(string, width / 2, height / 2)
 
       if (strings.length) {
+        p5.text('', 0, 0)
         for (let i = 0; i < strings.length; i++) {
           let time = p5.millis()
           p5.text(
             strings[i],
-            p5.mouseX + p5.sin(time / 500) * 20 + (i + 1) * 20,
-            p5.mouseY + p5.cos(time / 300) * 20 + (i + 1) * 20
+            p5.mouseX + p5.sin(time / 500) * 20 + i * 32,
+            p5.mouseY + p5.cos(time / 300) * 20 + (i + 1) * 32
           )
         }
       }
@@ -34,7 +35,7 @@ const Scene = props => {
       if (p5.keyCode === p5.ENTER) {
         strings.push(string)
         string = ''
-        console.log(strings)
+        // console.log(strings)
       }
       if (p5.keyCode === p5.BACKSPACE) {
         string = string.substring(0, string.length - 1)
