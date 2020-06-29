@@ -9,12 +9,12 @@ export const boundaryConstructor = p5 => {
       isStatic: true
     }
     this.body = Bodies.rectangle(x, y, w, h, options)
-    this.x = x
-    this.y = y
-    this.w = w
-    this.h = h
 
     this.show = function() {
+      this.x = x
+      this.y = y
+      this.w = w
+      this.h = h
       p5.push()
       p5.stroke(255)
       p5.fill(170)

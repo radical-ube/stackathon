@@ -14,14 +14,14 @@ export const boxConstructor = p5 => {
     this.saturation = color.saturation
     this.lightness = color.lightness
     this.alpha = color.alpha
-    this.pos = this.body.position
-    this.angle = this.body.angle
 
     this.isOffScreen = function() {
       return this.pos.y > p5.windowHeight
     }
 
     this.show = function() {
+      this.pos = this.body.position
+      this.angle = this.body.angle
       p5.push()
       p5.translate(this.pos.x, this.pos.y)
       p5.rotate(this.angle)
