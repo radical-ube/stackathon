@@ -1,7 +1,7 @@
 import Matter from 'matter-js'
 const {Bodies} = Matter
 
-export const boundaryConstructor = p5 => {
+export const boundaryConstructor = (p5, world) => {
   return function Boundary(x, y, w, h) {
     const options = {
       friction: 0.4,

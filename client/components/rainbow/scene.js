@@ -17,8 +17,8 @@ export const Scene = props => {
     let width = window.innerWidth
     let height = window.innerHeight * 0.8
     // constructors
-    const Box = boxConstructor(p5)
-    const Boundary = boundaryConstructor(p5)
+    const Box = boxConstructor(p5, world, engine)
+    const Boundary = boundaryConstructor(p5, world)
 
     // bodies
     const boxes = []
@@ -42,15 +42,27 @@ export const Scene = props => {
       }
     }
 
+    p5.keyPressed = () => {
+      if (p5.keyCode === p5.UP_ARROW) {
+        engine.timing.timeScale += 0.1
+      } else if (p5.keyCode === p5.DOWN_ARROW) {
+        engine.timing.timeScale -= 0.1
+      } else if (p5.keyCode === p5.ENTER) {
+        engine.timing.timeScale = 1
+      }
+      console.log(engine.timing.timeScale)
+    }
+
     // render
     p5.setup = () => {
       p5.createCanvas(width, height)
-      Engine.run(engine)
+      // Engine.run(engine)
 
       World.add(world, [ground.body, wall1.body, wall2.body])
     }
     p5.draw = () => {
       p5.background(50, 50, 50, 150)
+      Engine.update(engine)
       for (let i = 0; i < boxes.length; i++) {
         boxes[i].show()
         if (boxes[i].isOffScreen()) {

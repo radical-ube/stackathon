@@ -1,7 +1,9 @@
 import Matter from 'matter-js'
 const {Bodies} = Matter
 
-export const boxConstructor = p5 => {
+export const boxConstructor = (p5, world, engine) => {
+  // console.log('world', world)
+  // console.log('engine', engine)
   return function Box(x, y, w, h, color) {
     const options = {
       friction: 0.4,
