@@ -42,21 +42,9 @@ export const Scene = props => {
       }
     }
 
-    p5.keyPressed = () => {
-      if (p5.keyCode === p5.UP_ARROW) {
-        engine.timing.timeScale += 0.1
-      } else if (p5.keyCode === p5.DOWN_ARROW) {
-        engine.timing.timeScale -= 0.1
-      } else if (p5.keyCode === p5.ENTER) {
-        engine.timing.timeScale = 1
-      }
-      console.log(engine.timing.timeScale)
-    }
-
     // render
     p5.setup = () => {
       p5.createCanvas(width, height)
-      // Engine.run(engine)
 
       World.add(world, [ground.body, wall1.body, wall2.body])
     }
