@@ -14,7 +14,7 @@ export const Scene = props => {
     const engine = Engine.create()
     const world = engine.world
 
-    let width = window.innerWidth
+    let width = window.innerWidth / 6
     let height = window.innerHeight * 0.8
     // constructors
     const Box = boxConstructor(p5, world, engine)
@@ -24,10 +24,10 @@ export const Scene = props => {
     const boxes = []
     let ground = new Boundary(width / 2, height, width, 10)
     let wall1 = new Boundary(width / width - 21, height / 2, 5, height)
-    let wall2 = new Boundary(width / 6 + 20, height / 2, 5, height)
+    let wall2 = new Boundary(width + 20, height / 2, 5, height)
 
     p5.mouseDragged = () => {
-      if (p5.mouseX < width / 6 + 10 && p5.mouseX > width / width - 11) {
+      if (p5.mouseX < width + 10 && p5.mouseX > width / width - 11) {
         let color = props.getColor()
 
         const box = new Box(
