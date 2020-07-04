@@ -1,5 +1,5 @@
 import Matter from 'matter-js'
-const {Bodies} = Matter
+const {Bodies, World} = Matter
 
 export const boxConstructor = (p5, world, engine) => {
   return function Box(x, y, w, h, color) {
@@ -17,6 +17,10 @@ export const boxConstructor = (p5, world, engine) => {
 
     this.isOffScreen = function() {
       return this.body.position.y > p5.windowHeight
+    }
+
+    this.removeFromWorld = function() {
+      World.remove(world, this.body)
     }
 
     this.show = function() {
