@@ -1,7 +1,7 @@
 import Matter from 'matter-js'
 const {Bodies, World} = Matter
 
-export const boxConstructor = (p5, world, engine) => {
+const boxConstructor = (p5, world) => {
   return function Box(x, y, w, h, color) {
     const options = {
       friction: 0.4,
@@ -38,4 +38,20 @@ export const boxConstructor = (p5, world, engine) => {
       p5.pop()
     }
   }
+}
+
+export const addBox = (settings, boxes) => {
+  const {p5, world, props} = settings
+  const Box = boxConstructor(p5, world)
+  let color = props.getColor()
+
+  const box = new Box(
+    p5.mouseX,
+    p5.mouseY,
+    p5.random(10, 40),
+    p5.random(10, 40),
+    color
+  )
+  World.add(world, box.body)
+  boxes.push(box)
 }

@@ -2,43 +2,53 @@ import React, {useState, useEffect} from 'react'
 import p5 from 'p5'
 
 import Matter from 'matter-js'
-import {boxConstructor} from './matter/box'
+import {addBox} from './matter/box'
 import {boundaryConstructor} from './matter/boundary'
 
-const {Engine, World} = Matter
-
 export const Scene = props => {
-  const [myRef, setMyRef] = useState(React.createRef())
+  const [ref, setRef] = useState(React.createRef())
+  const {Engine, World} = Matter
 
   const Sketch = p5 => {
     const engine = Engine.create()
     const world = engine.world
-
     let width = window.innerWidth / 6
     let height = window.innerHeight * 0.8
+
+    const settings = {p5, world, props}
     // constructors
-    const Box = boxConstructor(p5, world, engine)
     const Boundary = boundaryConstructor(p5, world)
 
     // bodies
     const boxes = []
     let ground = new Boundary(width / 2, height, width, 10)
-    let wall1 = new Boundary(width / width - 21, height / 2, 5, height)
-    let wall2 = new Boundary(width + 20, height / 2, 5, height)
+    let wall1 = new Boundary(width / width - 6, height / 2, 5, height)
+    let wall2 = new Boundary(width + 5, height / 2, 5, height)
+
+    const mouseInBounds = () => {
+      return (
+        p5.mouseX < width &&
+        p5.mouseX > width / width - 1 &&
+        p5.mouseY < height &&
+        p5.mouseY > height / height - 1
+      )
+    }
 
     p5.mouseDragged = () => {
-      if (p5.mouseX < width + 10 && p5.mouseX > width / width - 11) {
-        let color = props.getColor()
-
-        const box = new Box(
-          p5.mouseX,
-          p5.mouseY,
-          p5.random(10, 40),
-          p5.random(10, 40),
-          color
-        )
-        World.add(world, box.body)
-        boxes.push(box)
+      if (mouseInBounds()) {
+        addBox(settings, boxes)
+      }
+    }
+    p5.mousePressed = () => {
+      if (mouseInBounds()) {
+        addBox(settings, boxes)
+      }
+    }
+    p5.keyPressed = () => {
+      if (p5.keyCode === p5.ENTER) {
+        if (mouseInBounds()) {
+          console.log('i am in ', props.getColor)
+        }
       }
     }
 
@@ -54,25 +64,22 @@ export const Scene = props => {
       for (let i = 0; i < boxes.length; i++) {
         boxes[i].show()
         if (boxes[i].isOffScreen()) {
-          World.remove(world, boxes[i].body)
+          boxes[i].removeFromWorld()
           boxes.splice(i, 1)
+          i--
+        }
+        if (i > 75) {
+          boxes[0].removeFromWorld()
+          boxes.splice(0, 1)
           i--
         }
       }
     }
-    p5.windowResized = () => {
-      width = window.innerWidth
-      height = window.innerHeight / 2
-      p5.resizeCanvas(width, height)
-      ground.w = width
-      ground.x = width / 2
-      World.clear(world, false)
-    }
   }
 
   useEffect(() => {
-    const myP5 = new p5(Sketch, myRef.current)
+    const myP5 = new p5(Sketch, ref.current)
   }, [])
 
-  return <div ref={myRef} />
+  return <div ref={ref} />
 }
