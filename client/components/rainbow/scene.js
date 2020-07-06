@@ -5,29 +5,30 @@ import Matter from 'matter-js'
 import {addBox} from './matter/box'
 import {addBoundaries} from './matter/boundary'
 
+const {Engine} = Matter
+
 export const Scene = props => {
   const [ref, setRef] = useState(React.createRef())
+  const [engine, setEngine] = useState(Engine.create())
+  const [world, setWorld] = useState(engine.world)
   const [boxes, setBoxes] = useState([])
-  const {Engine, World} = Matter
 
   const Sketch = p5 => {
-    const engine = Engine.create()
-    const world = engine.world
     let width = window.innerWidth / 6
-    let height = window.innerHeight * 0.8
+    let height = window.innerHeight * 0.85
 
-    const settings = {p5, world, props}
+    const settings = {p5, engine, world, props}
     const viewScreen = {width, height}
 
-    const mouseInBounds = () => {
+    // controls
+    const mouseInBounds = settings => {
       return (
         p5.mouseX < width &&
-        p5.mouseX > width / width - 1 &&
+        p5.mouseX > 0 &&
         p5.mouseY < height &&
-        p5.mouseY > height / height - 1
+        p5.mouseY > 0
       )
     }
-
     p5.mouseDragged = () => {
       if (mouseInBounds()) {
         addBox(settings, boxes)
@@ -39,9 +40,25 @@ export const Scene = props => {
       }
     }
     p5.keyPressed = () => {
+      // reverse gravity
       if (p5.keyCode === p5.ENTER) {
         if (mouseInBounds()) {
-          console.log('boxes', boxes)
+          world.gravity.y = world.gravity.y * -1
+        }
+      }
+      // alter timeScale
+      if (p5.keyCode === p5.DOWN_ARROW) {
+        if (mouseInBounds()) {
+          if (engine.timing.timeScale > 0.1) {
+            engine.timing.timeScale -= 1 / 20
+          }
+        }
+      }
+      if (p5.keyCode === p5.UP_ARROW) {
+        if (mouseInBounds()) {
+          if (engine.timing.timeScale < 1) {
+            engine.timing.timeScale += 1 / 20
+          }
         }
       }
     }
