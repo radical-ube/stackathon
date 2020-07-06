@@ -2,11 +2,10 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import user from './user'
+
 import boxes from './boxes'
 
 const reducer = combineReducers({
-  user,
   boxes
 })
 const middleware = composeWithDevTools(
@@ -15,4 +14,3 @@ const middleware = composeWithDevTools(
 const store = createStore(reducer, middleware)
 
 export default store
-export * from './user'

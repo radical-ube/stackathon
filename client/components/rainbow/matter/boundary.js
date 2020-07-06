@@ -19,10 +19,10 @@ export const addBoundaries = (settings, viewScreen) => {
   const {width, height} = viewScreen
   const Boundary = boundaryConstructor(settings)
 
-  let ground = new Boundary(width / 2, height + 20, width, 10)
+  let ground = new Boundary(width / 2, height + 5, width, 10)
   let leftWall = new Boundary(-5, height / 2, 10, height)
   let rightWall = new Boundary(width + 5, height / 2, 10, height)
-  let ceiling = new Boundary(width / 2, -20, width, 10)
+  let ceiling = new Boundary(width / 2, -5, width, 10)
 
   World.add(world, [ground.body, leftWall.body, rightWall.body, ceiling.body])
 }

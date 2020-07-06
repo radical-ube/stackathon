@@ -1,66 +1,26 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import PropTypes from 'prop-types'
+
 import {Start, Rainbow, Questions} from './components'
-import {me} from './store'
 
-/**
- * COMPONENT
- */
-class Routes extends Component {
-  componentDidMount() {
-    this.props.loadInitialData()
-  }
+const Routes = props => {
+  return (
+    <Switch>
+      {/* Routes placed here are available to all visitors */}
+      <Route exact path="/rainbow" component={Rainbow} />
+      <Route exact path="/questions" component={Questions} />
 
-  render() {
-    const {isLoggedIn} = this.props
-
-    return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route exact path="/rainbow" component={Rainbow} />
-        <Route exact path="/questions" component={Questions} />
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
-        {/* Displays our Start component as a default */}
-        <Route component={Start} />
-      </Switch>
-    )
-  }
+      {/* Displays our Start component as a default */}
+      <Route component={Start} />
+    </Switch>
+  )
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
-  return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
-  }
-}
-
-const mapDispatch = dispatch => {
-  return {
-    loadInitialData() {
-      dispatch(me())
-    }
-  }
+  return {}
 }
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
-
-/**
- * PROP TYPES
- */
-Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+export default withRouter(connect(mapState)(Routes))

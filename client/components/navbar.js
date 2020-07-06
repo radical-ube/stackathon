@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
 
 // material UI components
 import {makeStyles} from '@material-ui/core/styles'
@@ -74,9 +73,7 @@ const Navbar = props => {
  * CONTAINER
  */
 const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.id
-  }
+  return {}
 }
 
 const mapDispatch = dispatch => {
@@ -91,6 +88,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  * PROP TYPES
  */
 Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  handleClick: PropTypes.func.isRequired
 }
