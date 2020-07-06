@@ -1,7 +1,8 @@
 import Matter from 'matter-js'
 const {Bodies, World} = Matter
 
-const boxConstructor = (p5, world) => {
+const boxConstructor = settings => {
+  const {p5, world} = settings
   return function Box(x, y, w, h, color) {
     const options = {
       friction: 0.4,
@@ -42,7 +43,7 @@ const boxConstructor = (p5, world) => {
 
 export const addBox = (settings, boxes) => {
   const {p5, world, props} = settings
-  const Box = boxConstructor(p5, world)
+  const Box = boxConstructor(settings)
   let color = props.getColor()
 
   const box = new Box(

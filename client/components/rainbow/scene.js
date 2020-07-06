@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import p5 from 'p5'
-
 import Matter from 'matter-js'
+
 import {addBox} from './matter/box'
-import {boundaryConstructor} from './matter/boundary'
+import {addBoundaries} from './matter/boundary'
 
 export const Scene = props => {
   const [ref, setRef] = useState(React.createRef())
+  const [boxes, setBoxes] = useState([])
   const {Engine, World} = Matter
 
   const Sketch = p5 => {
@@ -16,14 +17,7 @@ export const Scene = props => {
     let height = window.innerHeight * 0.8
 
     const settings = {p5, world, props}
-    // constructors
-    const Boundary = boundaryConstructor(p5, world)
-
-    // bodies
-    const boxes = []
-    let ground = new Boundary(width / 2, height, width, 10)
-    let wall1 = new Boundary(width / width - 6, height / 2, 5, height)
-    let wall2 = new Boundary(width + 5, height / 2, 5, height)
+    const viewScreen = {width, height}
 
     const mouseInBounds = () => {
       return (
@@ -47,7 +41,7 @@ export const Scene = props => {
     p5.keyPressed = () => {
       if (p5.keyCode === p5.ENTER) {
         if (mouseInBounds()) {
-          console.log('i am in ', props.getColor)
+          console.log('boxes', boxes)
         }
       }
     }
@@ -55,8 +49,7 @@ export const Scene = props => {
     // render
     p5.setup = () => {
       p5.createCanvas(width, height)
-
-      World.add(world, [ground.body, wall1.body, wall2.body])
+      addBoundaries(settings, viewScreen)
     }
     p5.draw = () => {
       p5.background(50, 50, 50, 150)
