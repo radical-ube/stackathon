@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react'
 import p5 from 'p5'
 import Matter from 'matter-js'
 
-import {addBox} from './matter/box'
-import {addBoundaries} from './matter/boundary'
+import {addBox, drawBoxes, addBoundaries} from './matter'
 
 const {Engine} = Matter
 
@@ -39,13 +38,15 @@ export const Scene = props => {
         addBox(settings, boxes)
       }
     }
-    p5.keyPressed = () => {
+    p5.keyTyped = () => {
       // reverse gravity
-      if (p5.keyCode === p5.ENTER) {
+      if (p5.key === ' ') {
         if (mouseInBounds()) {
           world.gravity.y = world.gravity.y * -1
         }
       }
+    }
+    p5.keyPressed = () => {
       // alter timeScale
       if (p5.keyCode === p5.DOWN_ARROW) {
         if (mouseInBounds()) {
@@ -71,19 +72,7 @@ export const Scene = props => {
     p5.draw = () => {
       p5.background(50, 50, 50, 150)
       Engine.update(engine)
-      for (let i = 0; i < boxes.length; i++) {
-        boxes[i].show()
-        if (boxes[i].isOffScreen()) {
-          boxes[i].removeFromWorld()
-          boxes.splice(i, 1)
-          i--
-        }
-        if (i > 75) {
-          boxes[0].removeFromWorld()
-          boxes.splice(0, 1)
-          i--
-        }
-      }
+      drawBoxes(boxes)
     }
   }
 

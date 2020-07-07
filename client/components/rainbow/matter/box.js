@@ -56,3 +56,19 @@ export const addBox = (settings, boxes) => {
   World.add(world, box.body)
   boxes.push(box)
 }
+
+export const drawBoxes = boxes => {
+  for (let i = 0; i < boxes.length; i++) {
+    boxes[i].show()
+    if (boxes[i].isOffScreen()) {
+      boxes[i].removeFromWorld()
+      boxes.splice(i, 1)
+      i--
+    }
+    if (i > 50) {
+      boxes[0].removeFromWorld()
+      boxes.splice(0, 1)
+      i--
+    }
+  }
+}
