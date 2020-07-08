@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import p5 from 'p5'
 import Matter from 'matter-js'
 
-import {addBox, drawBoxes, addBoundaries} from './matter'
+import {addBox, drawBoxes, addBoundaries, removeFromArray} from './matter'
 
-const {Engine} = Matter
+const {Engine, Events, World} = Matter
 
 export const Scene = props => {
   const [ref, setRef] = useState(React.createRef())
@@ -28,16 +28,7 @@ export const Scene = props => {
         p5.mouseY > 0
       )
     }
-    p5.mouseDragged = () => {
-      if (mouseInBounds()) {
-        addBox(settings, boxes)
-      }
-    }
-    p5.mousePressed = () => {
-      if (mouseInBounds()) {
-        addBox(settings, boxes)
-      }
-    }
+
     p5.keyTyped = () => {
       // reverse gravity
       if (p5.key === ' ') {
@@ -47,6 +38,12 @@ export const Scene = props => {
       }
     }
     p5.keyPressed = () => {
+      if (p5.keyCode === p5.ENTER) {
+        if (mouseInBounds()) {
+          console.log('boxes', boxes)
+          console.log('world', world)
+        }
+      }
       // alter timeScale
       if (p5.keyCode === p5.DOWN_ARROW) {
         if (mouseInBounds()) {
@@ -64,6 +61,27 @@ export const Scene = props => {
       }
     }
 
+    Events.on(engine, 'collisionStart', function(event) {
+      const pairs = event.pairs
+      console.log('pairs: ', pairs)
+      const bodyA = pairs[0].bodyA
+      const bodyB = pairs[0].bodyB
+      const id = bodyB.id
+      if (bodyA.label === 'ground' && bodyB.label === 'color box') {
+        console.log('a box has hit the ground')
+        // console.log('boxId', bodyB.id)
+
+        World.remove(world, bodyB)
+        removeFromArray(boxes, id)
+        // console.log('bodyB', bodyB)
+      }
+      if (bodyA.label === 'ceiling' && bodyB.label === 'color box') {
+        console.log('a box has hit the ceiling')
+        World.remove(world, bodyB)
+        removeFromArray(boxes, id)
+      }
+    })
+
     // render
     p5.setup = () => {
       p5.createCanvas(width, height)
@@ -72,6 +90,11 @@ export const Scene = props => {
     p5.draw = () => {
       p5.background(50, 50, 50, 150)
       Engine.update(engine)
+      if (p5.keyIsDown(83)) {
+        if (mouseInBounds()) {
+          addBox(settings, boxes)
+        }
+      }
       drawBoxes(boxes)
     }
   }

@@ -6,11 +6,13 @@ const boxConstructor = settings => {
   return function Box(x, y, w, h, color) {
     const options = {
       friction: 0.4,
-      restitution: 0.8
+      restitution: 0.8,
+      label: 'color box'
     }
     this.body = Bodies.rectangle(x, y, w, h, options)
     this.w = w
     this.h = h
+    this.id = this.body.id
     this.hue = color.hue
     this.saturation = color.saturation
     this.lightness = color.lightness
@@ -59,16 +61,32 @@ export const addBox = (settings, boxes) => {
 
 export const drawBoxes = boxes => {
   for (let i = 0; i < boxes.length; i++) {
+    // if (boxes[i].id === boxes[i].body.id) {
     boxes[i].show()
+    // } else {
+    // boxes.splice(i, 1)
+    // i--
+    // }
     if (boxes[i].isOffScreen()) {
       boxes[i].removeFromWorld()
       boxes.splice(i, 1)
       i--
     }
+
     if (i > 50) {
       boxes[0].removeFromWorld()
       boxes.splice(0, 1)
       i--
+    }
+  }
+}
+
+export const removeFromArray = (array, id) => {
+  for (let i = 0; i < array.length; i++) {
+    let curItem = array[i]
+    if (curItem.id === id) {
+      array.splice(i, 1)
+      break
     }
   }
 }
