@@ -9,7 +9,7 @@ import {ThemeProvider} from '@material-ui/core/styles'
 import theme from './theme'
 
 // establishes socket connection
-import './socket'
+// import './socket'
 
 ReactDOM.render(
   <Provider store={store}>

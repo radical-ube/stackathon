@@ -26,6 +26,16 @@ import {
 export const Rainbow = props => {
   return (
     <Box className={useStyles().root}>
+      <Box>
+        <AppBar position="static" className={useStyles().root}>
+          <Toolbar justify="center">
+            <Typography gutterBottom variant="h5" component="p">
+              Directions: press 's' to rain blocks, 'f' to reverse gravity, 'a'
+              to slow time, 'd' to normalize time
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
       <Grid container direction="row" justify="center" spacing={0}>
         <Grid item xs={12} sm={2}>
           <Scene getColor={getRedColor} />
@@ -46,16 +56,6 @@ export const Rainbow = props => {
           <Scene getColor={getPurpleColor} />
         </Grid>
       </Grid>
-      <Box>
-        <AppBar position="static" className={useStyles().root}>
-          <Toolbar justify="center">
-            <Typography gutterBottom variant="h5" component="p">
-              Directions: press 's' to rain blocks, 'f' to reverse gravity, 'a'
-              to slow time, 'd' to normalize time
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Box>
     </Box>
   )
 }
