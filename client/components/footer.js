@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 // material UI components
 import {makeStyles} from '@material-ui/core/styles'
-import {AppBar, Toolbar, Button, Menu, MenuItem, Fade} from '@material-ui/core'
+import {AppBar, Toolbar, Button} from '@material-ui/core'
 
 // MUI classes
 const useStyles = makeStyles(theme => ({

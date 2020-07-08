@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import p5 from 'p5'
 import Matter from 'matter-js'
 
-import {addBox, drawBoxes, addBoundaries, removeFromArray} from './matter'
+import {addBox, drawBoxes, addBoundaries} from './matter'
+import {mouseInBounds, removeFromArray} from './utilities'
 
 const {Engine, Events, World} = Matter
 
@@ -20,65 +21,40 @@ export const Scene = props => {
     const viewScreen = {width, height}
 
     // controls
-    const mouseInBounds = settings => {
-      return (
-        p5.mouseX < width &&
-        p5.mouseX > 0 &&
-        p5.mouseY < height &&
-        p5.mouseY > 0
-      )
-    }
-
     p5.keyTyped = () => {
       // reverse gravity
-      if (p5.key === ' ') {
-        if (mouseInBounds()) {
+      if (p5.key === 'f') {
+        if (mouseInBounds(settings, viewScreen)) {
           world.gravity.y = world.gravity.y * -1
         }
       }
-    }
-    p5.keyPressed = () => {
-      if (p5.keyCode === p5.ENTER) {
-        if (mouseInBounds()) {
-          console.log('boxes', boxes)
-          console.log('world', world)
-        }
-      }
       // alter timeScale
-      if (p5.keyCode === p5.DOWN_ARROW) {
-        if (mouseInBounds()) {
-          if (engine.timing.timeScale > 0.1) {
-            engine.timing.timeScale -= 1 / 20
-          }
+      if (p5.key === 'a') {
+        if (mouseInBounds(settings, viewScreen)) {
+          engine.timing.timeScale = 0.3
         }
       }
-      if (p5.keyCode === p5.UP_ARROW) {
-        if (mouseInBounds()) {
-          if (engine.timing.timeScale < 1) {
-            engine.timing.timeScale += 1 / 20
-          }
+      if (p5.key === 'd') {
+        if (mouseInBounds(settings, viewScreen)) {
+          engine.timing.timeScale = 1
         }
       }
     }
 
-    Events.on(engine, 'collisionStart', function(event) {
+    Events.on(engine, 'collisionActive', function(event) {
       const pairs = event.pairs
-      console.log('pairs: ', pairs)
-      const bodyA = pairs[0].bodyA
-      const bodyB = pairs[0].bodyB
-      const id = bodyB.id
-      if (bodyA.label === 'ground' && bodyB.label === 'color box') {
-        console.log('a box has hit the ground')
-        // console.log('boxId', bodyB.id)
-
-        World.remove(world, bodyB)
-        removeFromArray(boxes, id)
-        // console.log('bodyB', bodyB)
-      }
-      if (bodyA.label === 'ceiling' && bodyB.label === 'color box') {
-        console.log('a box has hit the ceiling')
-        World.remove(world, bodyB)
-        removeFromArray(boxes, id)
+      for (let i = 0; i < pairs.length; i++) {
+        const bodyA = pairs[i].bodyA
+        const bodyB = pairs[i].bodyB
+        const id = bodyB.id
+        if (bodyA.label === 'ground' && bodyB.label === 'color box') {
+          World.remove(world, bodyB)
+          removeFromArray(boxes, id)
+        }
+        if (bodyA.label === 'ceiling' && bodyB.label === 'color box') {
+          World.remove(world, bodyB)
+          removeFromArray(boxes, id)
+        }
       }
     })
 
@@ -91,7 +67,7 @@ export const Scene = props => {
       p5.background(50, 50, 50, 150)
       Engine.update(engine)
       if (p5.keyIsDown(83)) {
-        if (mouseInBounds()) {
+        if (mouseInBounds(settings, viewScreen)) {
           addBox(settings, boxes)
         }
       }

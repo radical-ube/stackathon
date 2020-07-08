@@ -61,32 +61,6 @@ export const addBox = (settings, boxes) => {
 
 export const drawBoxes = boxes => {
   for (let i = 0; i < boxes.length; i++) {
-    // if (boxes[i].id === boxes[i].body.id) {
     boxes[i].show()
-    // } else {
-    // boxes.splice(i, 1)
-    // i--
-    // }
-    if (boxes[i].isOffScreen()) {
-      boxes[i].removeFromWorld()
-      boxes.splice(i, 1)
-      i--
-    }
-
-    if (i > 50) {
-      boxes[0].removeFromWorld()
-      boxes.splice(0, 1)
-      i--
-    }
-  }
-}
-
-export const removeFromArray = (array, id) => {
-  for (let i = 0; i < array.length; i++) {
-    let curItem = array[i]
-    if (curItem.id === id) {
-      array.splice(i, 1)
-      break
-    }
   }
 }

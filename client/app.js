@@ -17,7 +17,7 @@ import Routes from './routes'
 const App = () => {
   return (
     <Box className={useStyles().root}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes />
       <Footer />
     </Box>

@@ -2,8 +2,7 @@ import React from 'react'
 
 // material UI components
 import {makeStyles} from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
+import {Grid, Box, AppBar, Toolbar, Typography} from '@material-ui/core/'
 
 // MUI classes
 const useStyles = makeStyles(theme => ({
@@ -47,6 +46,16 @@ export const Rainbow = props => {
           <Scene getColor={getPurpleColor} />
         </Grid>
       </Grid>
+      <Box>
+        <AppBar position="static" className={useStyles().root}>
+          <Toolbar justify="center">
+            <Typography gutterBottom variant="h5" component="p">
+              Directions: press 's' to rain blocks, 'f' to reverse gravity, 'a'
+              to slow time, 'd' to normalize time
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
     </Box>
   )
 }
