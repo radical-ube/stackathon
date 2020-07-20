@@ -6,5 +6,4 @@
 export {default as Navbar} from './navbar'
 export {default as Start} from './start'
 export {Rainbow} from './rainbow'
-export {default as Questions} from './questions'
 export {default as Footer} from './footer'

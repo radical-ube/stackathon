@@ -8,9 +8,6 @@ import App from './app'
 import {ThemeProvider} from '@material-ui/core/styles'
 import theme from './theme'
 
-// establishes socket connection
-// import './socket'
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

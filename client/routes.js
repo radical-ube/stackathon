@@ -9,7 +9,6 @@ const Routes = props => {
     <Switch>
       {/* Routes placed here are available to all visitors */}
       <Route exact path="/rainbow" component={Rainbow} />
-      <Route exact path="/questions" component={Questions} />
 
       {/* Displays our Start component as a default */}
       <Route component={Start} />
