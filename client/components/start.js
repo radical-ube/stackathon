@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {theme} from '../theme'
 
 // material UI components
 import {makeStyles} from '@material-ui/core/styles'
 import {
   Box,
-  Grid,
   Card,
   CardActionArea,
   CardContent,
@@ -30,34 +30,25 @@ export const Start = props => {
 
   return (
     <Box className={classes.root}>
-      <Grid
-        container
-        direction="row"
-        justify="space-evenly"
-        alignItems="center"
-      >
-        {/* <Grid item > */}
-        <Card justify="center">
-          <Link to="/rainbow">
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image="./assets/pridenyc.jpg"
-                title="Pride NYC"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Rain(bow) On Me
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Rain some rainbow blocks on the world!
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Link>
-        </Card>
-        {/* </Grid> */}
-      </Grid>
+      <Card justify="center">
+        <Link to="/rainbow">
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image="./assets/pridenyc.jpg"
+              title="Pride NYC"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Rain(bow) On Me
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Rain some rainbow blocks on the world!
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
+      </Card>
     </Box>
   )
 }
